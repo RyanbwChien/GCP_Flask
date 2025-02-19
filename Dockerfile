@@ -5,7 +5,7 @@ FROM python:3.9
 WORKDIR /app
 
 # 複製程式碼
-COPY ..
+COPY . /app  # 把當前目錄內的所有檔案複製到 Docker 容器的當前目錄（已設定為 /app）
 
 # 安裝依賴
 RUN pip install --no-cache-dir -r requirements.txt
