@@ -1,7 +1,7 @@
 
 import sys
-sys.path.append(r"C:\Users\user\ryanlinechatbot2")
-sys.path.append(r"C:\Users\user\ryanlinechatbot2\package\Ryan")
+# sys.path.append(r"C:\Users\user\ryanlinechatbot2")
+# sys.path.append(r"C:\Users\user\ryanlinechatbot2\package\Ryan")
 from flask import Flask, request, abort
 from linebot.models import MessageEvent, TextMessage, ImageMessage
 from linebot import LineBotApi, WebhookHandler
@@ -46,7 +46,7 @@ def even(event):
     April_response_a = April_handle_text_message_a(event, line_bot_api)
     Daryl_response_a = Daryl_handle_text_message_a(event, line_bot_api)
     Eva_response_a = Eva_handle_text_message_a(event, line_bot_api)
-    Vicky_response_b = Vicky_handle_text_message_b(event, line_bot_api)
+
     
     total = [Ryan_response_a,Ryan_response_b,Vicky_response_a,April_response_a,Daryl_response_a,Eva_response_a] 
     if total == [None]*6:

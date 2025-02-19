@@ -8,4 +8,3 @@ openai
 pymysql
 numpy
 python-dotenv
-inspect
