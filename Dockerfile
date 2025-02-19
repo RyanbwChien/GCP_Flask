@@ -11,4 +11,4 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 啟動 Flask 伺服器
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app6:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "Linebotapi_main:app"]
