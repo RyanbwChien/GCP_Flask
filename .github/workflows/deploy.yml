@@ -37,4 +37,4 @@ jobs:
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest  # 拉取最新的 Docker 映像
             docker stop $(docker ps -q --filter ancestor=${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest)  # 停止舊的容器
-            docker run -d -p 80:8080 ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest  # 啟動新的容器
+            docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest  # 啟動新的容器
