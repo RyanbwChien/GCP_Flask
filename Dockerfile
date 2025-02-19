@@ -5,7 +5,7 @@ FROM python:3.9
 WORKDIR /app
 
 # 複製程式碼
-COPY . /app
+COPY ..
 
 # 安裝依賴
 RUN pip install --no-cache-dir -r requirements.txt
