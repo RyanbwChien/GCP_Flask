@@ -5,10 +5,10 @@ FROM python:3.9
 WORKDIR /app
 
 # 複製程式碼
-COPY . /app
+COPY ..
 
 # 安裝依賴
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 啟動 Flask 伺服器
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "Linebotapi_main:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8080", "Linebotapi_main:app"]
