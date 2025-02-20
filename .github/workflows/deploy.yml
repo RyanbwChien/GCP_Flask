@@ -25,7 +25,7 @@ jobs:
       - name: Deploy Flask App to Cloud Functions
         run: |
           gcloud functions deploy flask-function \
-            --runtime python39 \
+            --runtime python311 \
             --trigger-http \
             --allow-unauthenticated \
             --entry-point=main  # entry-point 是 Flask 應用的主函數
