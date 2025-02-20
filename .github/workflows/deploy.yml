@@ -3,7 +3,7 @@ name: Deploy Flask App to GCP Cloud Functions
 on:
   push:
     branches:
-      - main  # 當 main 分支有變更時觸發部署
+      - main  # 當 main 分支有變動時觸發部署
 
 jobs:
   deploy:
@@ -16,10 +16,10 @@ jobs:
 
       # 2. 設定 GCP 認證
       - name: Set up GCP credentials
-        uses: google-github-actions/setup-gcloud@v0
+        uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}  # GCP 項目 ID
-          credentials_json: ${{ secrets.GCP_SA_KEY }}  # 服務帳戶密鑰
+          project_id: ${{ secrets.GCP_PROJECT_ID }}  # 使用 GCP 項目 ID
+          service_account_key: ${{ secrets.GCP_SA_KEY }}  # 使用服務帳戶密鑰
 
       # 3. 部署到 Google Cloud Functions
       - name: Deploy Flask App to Cloud Functions
