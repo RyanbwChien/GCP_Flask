@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # 檢查 `GCP_SA_KEY` 是否載入成功
+      - name: Debug GCP_SA_KEY
+        run: echo '${{ secrets.GCP_SA_KEY }}' | wc -c
+
+      # 設定 GCP 認證
       - name: Set up GCP credentials
         uses: google-github-actions/setup-gcloud@v2
         with:
@@ -20,9 +25,21 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      # 自動啟用 Cloud Functions API
-      - name: Enable Cloud Functions API
-        run: gcloud services enable cloudfunctions.googleapis.com
+      # 手動存 `key.json`
+      - name: Save GCP Service Account Key
+        run: echo '${{ secrets.GCP_SA_KEY }}' > key.json
+
+      # 驗證 `key.json` 是否存在
+      - name: Check if key.json exists
+        run: ls -l key.json
+
+      # 強制指定 GCP 帳戶
+      - name: Manually set GCP account
+        run: gcloud config set account $(jq -r .client_email key.json)
+
+      # 啟用 GCP 認證
+      - name: Authenticate with Google Cloud
+        run: gcloud auth activate-service-account --key-file=key.json
 
       # 部署到 Cloud Functions
       - name: Deploy Flask App to Cloud Functions
