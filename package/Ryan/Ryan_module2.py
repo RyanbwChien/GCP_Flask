@@ -12,5 +12,5 @@ def Ryan_handle_text_message_b(event,line_bot_api):
     if isinstance(event.message, TextMessage):
         text = event.message.text
         if "bye" in text.lower():
-            return(TextMessage(text="Goodbye from Developer B!"))
+            return(TextMessage(text="Goodbye from Developer BOOO!"))
             
