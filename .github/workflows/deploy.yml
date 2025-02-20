@@ -3,32 +3,50 @@ name: Deploy Flask App to GCP Cloud Functions
 on:
   push:
     branches:
-      - main  # 當 main 分支有變動時觸發部署
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # 使用 Ubuntu 作為運行環境
+    runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout 代碼
       - name: Checkout code
         uses: actions/checkout@v2
+
       # 檢查 `GCP_SA_KEY` 是否載入成功
       - name: Debug GCP_SA_KEY
         run: echo '${{ secrets.GCP_SA_KEY }}' | wc -c
-      # 2. 設定 GCP 認證
+
+      # 設定 GCP 認證
       - name: Set up GCP credentials
         uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}  # 使用 GCP 項目 ID
-          service_account_key: ${{ secrets.GCP_SA_KEY }}  # 使用服務帳戶密鑰
-          export_default_credentials: true  # 🔴 確保 GCP 認證適用於所有後續指令
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
 
-      # 3. 部署到 Google Cloud Functions
+      # 手動存 `key.json`
+      - name: Save GCP Service Account Key
+        run: echo '${{ secrets.GCP_SA_KEY }}' > key.json
+
+      # 驗證 `key.json` 是否存在
+      - name: Check if key.json exists
+        run: ls -l key.json
+
+      # 強制指定 GCP 帳戶
+      - name: Manually set GCP account
+        run: gcloud config set account $(jq -r .client_email key.json)
+
+      # 啟用 GCP 認證
+      - name: Authenticate with Google Cloud
+        run: gcloud auth activate-service-account --key-file=key.json
+
+      # 部署到 Cloud Functions
       - name: Deploy Flask App to Cloud Functions
         run: |
           gcloud functions deploy flask-function \
             --runtime python311 \
             --trigger-http \
             --allow-unauthenticated \
-            --entry-point=main  # entry-point 是 Flask 應用的主函數
+            --entry-point=main \
+            --region=asia-east1
