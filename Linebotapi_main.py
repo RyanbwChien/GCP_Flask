@@ -25,7 +25,7 @@ handler = WebhookHandler(secret)
 
 app = Flask(__name__)
 
-@app.route("/", methods=['POST'])
+@app.route("/webhook", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']  # 簽名驗證
     body = request.get_data(as_text=True)            # 接收請求的內容
