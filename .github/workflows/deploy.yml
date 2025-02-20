@@ -13,13 +13,15 @@ jobs:
       # 1. Checkout 代碼
       - name: Checkout code
         uses: actions/checkout@v2
-
+      - name: Authenticate with Google Cloud
+        run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SA_KEY }}
       # 2. 設定 GCP 認證
       - name: Set up GCP credentials
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}  # 使用 GCP 項目 ID
           service_account_key: ${{ secrets.GCP_SA_KEY }}  # 使用服務帳戶密鑰
+          export_default_credentials: true  # 🔴 確保 GCP 認證適用於所有後續指令
 
       # 3. 部署到 Google Cloud Functions
       - name: Deploy Flask App to Cloud Functions
