@@ -13,8 +13,9 @@ jobs:
       # 1. Checkout 代碼
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Authenticate with Google Cloud
-        run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SA_KEY }}
+      # 檢查 `GCP_SA_KEY` 是否載入成功
+      - name: Debug GCP_SA_KEY
+        run: echo '${{ secrets.GCP_SA_KEY }}' | wc -c
       # 2. 設定 GCP 認證
       - name: Set up GCP credentials
         uses: google-github-actions/setup-gcloud@v2
