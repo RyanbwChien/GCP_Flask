@@ -7,7 +7,7 @@ from linebot.models import MessageEvent, TextMessage, ImageMessage
 from linebot import LineBotApi, WebhookHandler
 # import package
 from package import *           # 匯入處理器      
-import inspect
+# import inspect
 
 # # 列出套件內的所有函數
 # functions = [name for name, obj in inspect.getmembers( package, inspect.isfunction)]
