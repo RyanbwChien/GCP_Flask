@@ -7,14 +7,14 @@ from linebot.models import MessageEvent, TextMessage, ImageMessage
 from linebot import LineBotApi, WebhookHandler
 # import package
 from package import *           # 匯入處理器      
-# import inspect
+import inspect
 
-# # 列出套件內的所有函數
-# functions = [name for name, obj in inspect.getmembers( package, inspect.isfunction)]
+# 列出套件內的所有函數
+functions = [name for name, obj in inspect.getmembers( package, inspect.isfunction)]
 
-# print("套件中的函數有：")
-# for func in functions:
-#     print(func)
+print("套件中的函數有：")
+for func in functions:
+    print(func)
 
 
 access_token = 'cwfAcIPWB3NAryno2UPgj+e3diWSHtHwJAYZPlU/frqCb+MU/zmcW6tC8bjyJrhHQbnRuBwotj8jfL3GTPr21bDi1KIFhVv5yAdV8jyjQFLdwT/5iEAlYUzo3um15GpsyJxsGHm1H333O2Hzwxm8ngdB04t89/1O/w1cDnyilFU='
