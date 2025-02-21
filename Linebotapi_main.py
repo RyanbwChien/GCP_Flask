@@ -17,8 +17,11 @@ from package import *           # 匯入處理器
 #     print(func)
 import os
 
-LINE_ACCESS_TOKEN = os.getenv("LINE_ACCESS_TOKEN")
-LINE_SECRET = os.getenv("LINE_SECRET")
+access_token = os.getenv("LINE_ACCESS_TOKEN")
+secret = os.getenv("LINE_SECRET")
+
+line_bot_api = LineBotApi(access_token)
+handler = WebhookHandler(secret)
 
 app = Flask(__name__)
 
