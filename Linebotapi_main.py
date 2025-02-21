@@ -17,8 +17,8 @@ from package import *           # 匯入處理器
 #     print(func)
 
 
-access_token = 'cwfAcIPWB3NAryno2UPgj+e3diWSHtHwJAYZPlU/frqCb+MU/zmcW6tC8bjyJrhHQbnRuBwotj8jfL3GTPr21bDi1KIFhVv5yAdV8jyjQFLdwT/5iEAlYUzo3um15GpsyJxsGHm1H333O2Hzwxm8ngdB04t89/1O/w1cDnyilFU='
-secret = '60709c4dd70a5fe89e1341394a2eafa6'
+access_token = '7nbeHQXUhTmL0boi/XUfEnF+FbIpw5c9pCvf5oODmi3xhokSbceUNOd0AsPscwuHusHfLj5p9ixA9IWzTJQW+iIKytefUcXae6JpeX7QK67cGb8ucUgATY/oaj+NPhGbUiAd3f3t3JBnqT7/LOUdBQdB04t89/1O/w1cDnyilFU='
+secret = 'e117059ff2261b2c0e6640403208b939'
 
 line_bot_api = LineBotApi(access_token)
 handler = WebhookHandler(secret)
@@ -72,4 +72,4 @@ def even(event):
         line_bot_api.reply_message(event.reply_token, responses)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8085)
