@@ -19,7 +19,7 @@ import os
 
 # dotenv.load_dotenv()
 
-# openai.api_key = os.environ["openai_apikey"]
+openai.api_key = os.environ["openai_apikey"]
 
 link_msg = ["請直接輸入或轉貼要查詢是否為詐騙的訊息", "請直接輸入或轉貼要查詢是否為詐騙的LINE ID、網站或電話（帶+號即為境外來電，請留意）","開啟連結","請直接輸入或轉貼您要詢問的問題","最新消息"]
 user_states = {}

@@ -15,13 +15,10 @@ from package import *           # 匯入處理器
 # print("套件中的函數有：")
 # for func in functions:
 #     print(func)
+import os
 
-
-access_token = '7nbeHQXUhTmL0boi/XUfEnF+FbIpw5c9pCvf5oODmi3xhokSbceUNOd0AsPscwuHusHfLj5p9ixA9IWzTJQW+iIKytefUcXae6JpeX7QK67cGb8ucUgATY/oaj+NPhGbUiAd3f3t3JBnqT7/LOUdBQdB04t89/1O/w1cDnyilFU='
-secret = 'e117059ff2261b2c0e6640403208b939'
-
-line_bot_api = LineBotApi(access_token)
-handler = WebhookHandler(secret)
+LINE_ACCESS_TOKEN = os.getenv("LINE_ACCESS_TOKEN")
+LINE_SECRET = os.getenv("LINE_SECRET")
 
 app = Flask(__name__)
 
