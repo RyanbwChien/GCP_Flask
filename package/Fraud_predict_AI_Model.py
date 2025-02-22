@@ -7,6 +7,7 @@ import re
 import torch
 import torch.nn.functional as F
 from google.cloud import storage
+from linebot.models import TextMessage
 # from pathlib import Path
 # model_path = Path(__file__).parent / "TIR104_G1_Fraud_Classification_text.pth"
 
@@ -64,4 +65,4 @@ def transformers_LLM_Model(event,line_bot_api):
             risk_assessment = "這是一則極高風險的詐騙訊息，請勿回應或點擊任何連結"
     
     reply = f"詐騙機率是{prob:.2f}%，{risk_assessment}"
-    return(reply)
+    return(TextMessage(text=reply))

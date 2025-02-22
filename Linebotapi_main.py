@@ -80,13 +80,13 @@ def even(event):
             reply = transformers_LLM_Model(event)
             # reply = "回答模式1"
             user_states[user_id] = "" 
-            line_bot_api.reply_message(event.reply_token, TextMessage(text=reply))
+            line_bot_api.reply_message(event.reply_token, reply)
             return jsonify({"status": "ok"}), 200
         if user_states[user_id] == "模式4":
             reply = ask_openai(event)
             # reply = "回答模式4"
             user_states[user_id] = "" 
-            line_bot_api.reply_message(event.reply_token, TextMessage(text=reply))
+            line_bot_api.reply_message(event.reply_token, reply)
             return jsonify({"status": "ok"}), 200
     return jsonify({"status": "ok"}), 200
 

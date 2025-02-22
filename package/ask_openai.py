@@ -6,6 +6,8 @@ Created on Sat Feb  8 15:09:39 2025
 """
 import openai
 import os
+from linebot.models import TextMessage
+
 def ask_openai(message,line_bot_api):
     openai.api_key = os.environ["openai_apikey"]
     response = openai.chat.completions.create(
@@ -26,4 +28,4 @@ def ask_openai(message,line_bot_api):
         # handle_parsing_errors=True,
     )  
     answer = response.choices[0].message.content.strip()
-    return answer
+    return(TextMessage(text=answer))
