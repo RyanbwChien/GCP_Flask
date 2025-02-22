@@ -4,8 +4,6 @@ Created on Thu Feb  6 16:29:05 2025
 
 @author: user
 """
-from .Ryan import *
-from .Eva import *
-from .Daryl import *
-from .April import *
-from .Vicky import *
+
+from .Fraud_predict_AI_Model import transformers_LLM_Model
+from .Fraud_RAG_Model import RAG_Model

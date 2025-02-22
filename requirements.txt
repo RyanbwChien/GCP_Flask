@@ -8,3 +8,6 @@ openai
 pymysql
 numpy
 python-dotenv
+
+langchain
+torch
