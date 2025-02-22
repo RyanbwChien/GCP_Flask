@@ -28,13 +28,13 @@ def download_model(bucket_name, source_blob_name, destination_file_name):
 
 bucket_name = "ryanbwchien"
 source_folder_name = "RAG/faiss_index_dir/index.faiss"  # GCS 中的資料夾路徑
-destination_folder_name = "/tmp/faiss_index_dir/index.faiss"  # 本地下載位置
+destination_folder_name = "/tmp/index.faiss"  # 本地下載位置
 
 download_model(bucket_name, source_folder_name, destination_folder_name)
 
 bucket_name = "ryanbwchien"
 source_folder_name = "RAG/faiss_index_dir/index.pkl"  # GCS 中的資料夾路徑
-destination_folder_name = "/tmp/faiss_index_dir/index.pkl"  # 本地下載位置
+destination_folder_name = "/tmp/index.pkl"  # 本地下載位置
 
 download_model(bucket_name, source_folder_name, destination_folder_name)
 openai.api_key = os.environ["openai_apikey"]
@@ -44,7 +44,7 @@ from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-base-zh")
 # 重新載入 FAISS
-db = FAISS.load_local("/tmp/faiss_index_dir", embeddings,allow_dangerous_deserialization=True)
+db = FAISS.load_local("/tmp", embeddings,allow_dangerous_deserialization=True)
 
 def preprocess_text(text):
     text = re.sub(r"<br\s*/?>", ". ", text)  # 或者替换为空格
