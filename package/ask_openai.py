@@ -6,7 +6,7 @@ Created on Sat Feb  8 15:09:39 2025
 """
 import openai
 import os
-def ask_openai(message):
+def ask_openai(message,line_bot_api):
     openai.api_key = os.environ["openai_apikey"]
     response = openai.chat.completions.create(
         model="gpt-4o",

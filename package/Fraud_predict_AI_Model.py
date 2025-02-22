@@ -32,7 +32,7 @@ def preprocess_text(text):
     text = re.sub(r"\s+", " ", text.strip())  # 清理多余空格 如果有一個以上空白會變成一個空白
     return text
 
-def transformers_LLM_Model(event):
+def transformers_LLM_Model(event,line_bot_api):
 
     texts = preprocess_text(event.message.text)
 

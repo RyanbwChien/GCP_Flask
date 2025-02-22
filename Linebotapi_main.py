@@ -18,10 +18,6 @@ from package import *          # 匯入處理器
 # for func in functions:
 #     print(func)
 import os
-
-os.environ["LINE_ACCESS_TOKEN"] = "cwfAcIPWB3NAryno2UPgj+e3diWSHtHwJAYZPlU/frqCb+MU/zmcW6tC8bjyJrhHQbnRuBwotj8jfL3GTPr21bDi1KIFhVv5yAdV8jyjQFLdwT/5iEAlYUzo3um15GpsyJxsGHm1H333O2Hzwxm8ngdB04t89/1O/w1cDnyilFU="
-os.environ["LINE_SECRET"] = "60709c4dd70a5fe89e1341394a2eafa6"
-
 access_token = os.getenv("LINE_ACCESS_TOKEN")
 secret = os.getenv("LINE_SECRET")
 
