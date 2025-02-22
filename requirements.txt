@@ -10,4 +10,4 @@ numpy
 python-dotenv
 google-cloud-storage
 langchain
-torch
+torch==2.5.1
