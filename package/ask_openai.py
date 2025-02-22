@@ -8,7 +8,7 @@ import openai
 import os
 from linebot.models import TextMessage
 
-def ask_openai(message,line_bot_api):
+def ask_openai(message):
     openai.api_key = os.environ["openai_apikey"]
     response = openai.chat.completions.create(
         model="gpt-4o",
@@ -28,4 +28,4 @@ def ask_openai(message,line_bot_api):
         # handle_parsing_errors=True,
     )  
     answer = response.choices[0].message.content.strip()
-    return(TextMessage(text=answer))
+    return(answer)

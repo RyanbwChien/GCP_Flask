@@ -7,7 +7,7 @@ import re
 import torch
 import torch.nn.functional as F
 from google.cloud import storage
-from linebot.models import TextMessage
+
 # from pathlib import Path
 # model_path = Path(__file__).parent / "TIR104_G1_Fraud_Classification_text.pth"
 
@@ -33,7 +33,7 @@ def preprocess_text(text):
     text = re.sub(r"\s+", " ", text.strip())  # 清理多余空格 如果有一個以上空白會變成一個空白
     return text
 
-def transformers_LLM_Model(event,line_bot_api):
+def transformers_LLM_Model(event):
 
     texts = preprocess_text(event.message.text)
 
@@ -65,4 +65,4 @@ def transformers_LLM_Model(event,line_bot_api):
             risk_assessment = "這是一則極高風險的詐騙訊息，請勿回應或點擊任何連結"
     
     reply = f"詐騙機率是{prob:.2f}%，{risk_assessment}"
-    return(TextMessage(text=reply))
+    return(reply)
