@@ -9,3 +9,4 @@ pymysql
 numpy
 google-cloud-storage
 torch==2.5.1
+transformers
