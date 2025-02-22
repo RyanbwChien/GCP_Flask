@@ -87,10 +87,10 @@ def even(event):
             line_bot_api.reply_message(event.reply_token, reply)
             return jsonify({"status": "ok"}), 200
         if user_states[user_id] == "模式4":
-            reply = RAG_Model(event,line_bot_api)
-            # reply = "回答模式4"
+            # reply = RAG_Model(event,line_bot_api)
+            reply = "回答模式4"
             user_states[user_id] = "" 
-            line_bot_api.reply_message(event.reply_token, reply)
+            line_bot_api.reply_message(event.reply_token, TextMessage(text=reply))
             return jsonify({"status": "ok"}), 200
     return jsonify({"status": "ok"}), 200
 

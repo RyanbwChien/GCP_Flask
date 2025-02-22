@@ -27,7 +27,7 @@ download_model(bucket_name, source_blob_name, destination_file_name)
 
 
 
-model2 = torch.load(destination_file_name,map_location=torch.device('cpu'))
+model2 = torch.load(destination_file_name,map_location=torch.device('cpu'),weights_only=True)
 from transformers import BertTokenizer
 tokenizer = BertTokenizer.from_pretrained("bert-base-chinese")
 
