@@ -6,7 +6,7 @@ Created on Thu Feb  6 16:26:57 2025
 """
 
 import openai
-from linebot.models import  TextMessage
+# from linebot.models import  TextMessage
 import os
 import re
 from langchain.chat_models import ChatOpenAI
@@ -19,45 +19,32 @@ from google.cloud import storage
 # from pathlib import Path
 # model_path = Path(__file__).parent / "TIR104_G1_Fraud_Classification_text.pth"
 
-def download_folder(bucket_name, source_folder_name, destination_folder_name):
+def download_model(bucket_name, source_blob_name, destination_file_name):
     client = storage.Client()
     bucket = client.bucket(bucket_name)
-    
-    # 確保目標資料夾存在
-    if not os.path.exists(destination_folder_name):
-        os.makedirs(destination_folder_name)
-    
-    # 列出資料夾中的所有 blob
-    blobs = client.list_blobs(bucket_name, prefix=source_folder_name, delimiter='/')
-    
-    # 遍歷資料夾中的每個檔案並下載
-    for blob in blobs:
-        # 設定本地檔案的路徑
-        local_file_path = os.path.join(destination_folder_name, blob.name[len(source_folder_name):])
-        
-        # 確保本地檔案的父資料夾存在
-        os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
-        
-        # 下載檔案
-        blob.download_to_filename(local_file_path)
-        print(f"Downloaded {blob.name} to {local_file_path}")
+    blob = bucket.blob(source_blob_name)
+    blob.download_to_filename(destination_file_name)
+    print(f"Model downloaded to {destination_file_name}")
 
 bucket_name = "ryanbwchien"
-source_folder_name = "RAG/faiss_index_dir"  # GCS 中的資料夾路徑
-destination_folder_name = "/tmp/faiss_index_dir"  # 本地下載位置
+source_folder_name = "RAG/faiss_index_dir/index.faiss"  # GCS 中的資料夾路徑
+destination_folder_name = "/tmp/faiss_index_dir/index.faiss"  # 本地下載位置
 
-download_folder(bucket_name, source_folder_name, destination_folder_name)
+download_model(bucket_name, source_folder_name, destination_folder_name)
 
+bucket_name = "ryanbwchien"
+source_folder_name = "RAG/faiss_index_dir/index.pkl"  # GCS 中的資料夾路徑
+destination_folder_name = "/tmp/faiss_index_dir/index.pkl"  # 本地下載位置
 
+download_model(bucket_name, source_folder_name, destination_folder_name)
 openai.api_key = os.environ["openai_apikey"]
-
 
 # RAG
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-base-zh")
 # 重新載入 FAISS
-db = FAISS.load_local(destination_folder_name, embeddings,allow_dangerous_deserialization=True)
+db = FAISS.load_local("/tmp/faiss_index_dir", embeddings,allow_dangerous_deserialization=True)
 
 def preprocess_text(text):
     text = re.sub(r"<br\s*/?>", ". ", text)  # 或者替换为空格
@@ -112,5 +99,5 @@ def RAG_Model(event,line_bot_api):
 
     ### Ask Queries Now
     reply = run_my_rag(qa, texts)
-    return(TextMessage(text=reply))
+    return(reply)
 
