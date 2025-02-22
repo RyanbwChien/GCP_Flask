@@ -8,6 +8,6 @@ openai
 pymysql
 numpy
 python-dotenv
-
+google-cloud-storage
 langchain
 torch
