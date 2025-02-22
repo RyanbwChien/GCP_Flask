@@ -47,17 +47,17 @@ def callback():
 def even(event):
     global user_states
     # 1. 獲取用戶 ID
-    # user_id = event.source.user_id
+    user_id = event.source.user_id
     # 2. 獲取用戶名稱
-    # profile = line_bot_api.get_profile(user_id)
-    # user_name = profile.display_name
+    profile = line_bot_api.get_profile(user_id)
+    user_name = profile.display_name
     # 3. 獲取訊息發送時間
     timestamp = event.timestamp / 1000.0
     # formatted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp))
     if user_id not in user_states:
         user_states[user_id] = ""
     user_id = event.source.user_id
-    message_type = "text"
+
     msg = event.message.text
     print(msg)
 
