@@ -19,8 +19,8 @@ from package import *          # 匯入處理器
 #     print(func)
 import os
 
-# os.environ["LINE_ACCESS_TOKEN"] = "cwfAcIPWB3NAryno2UPgj+e3diWSHtHwJAYZPlU/frqCb+MU/zmcW6tC8bjyJrhHQbnRuBwotj8jfL3GTPr21bDi1KIFhVv5yAdV8jyjQFLdwT/5iEAlYUzo3um15GpsyJxsGHm1H333O2Hzwxm8ngdB04t89/1O/w1cDnyilFU="
-# os.environ["LINE_SECRET"] = "60709c4dd70a5fe89e1341394a2eafa6"
+os.environ["LINE_ACCESS_TOKEN"] = "cwfAcIPWB3NAryno2UPgj+e3diWSHtHwJAYZPlU/frqCb+MU/zmcW6tC8bjyJrhHQbnRuBwotj8jfL3GTPr21bDi1KIFhVv5yAdV8jyjQFLdwT/5iEAlYUzo3um15GpsyJxsGHm1H333O2Hzwxm8ngdB04t89/1O/w1cDnyilFU="
+os.environ["LINE_SECRET"] = "60709c4dd70a5fe89e1341394a2eafa6"
 
 access_token = os.getenv("LINE_ACCESS_TOKEN")
 secret = os.getenv("LINE_SECRET")
@@ -81,13 +81,13 @@ def even(event):
             return jsonify({"status": "ok"}), 200
     else:
         if user_states[user_id] == "模式1":
-            reply = transformers_LLM_Model(event,line_bot_api)
+            reply = transformers_LLM_Model(event)
             # reply = "回答模式1"
             user_states[user_id] = "" 
-            line_bot_api.reply_message(event.reply_token, reply)
+            line_bot_api.reply_message(event.reply_token, TextMessage(text=reply))
             return jsonify({"status": "ok"}), 200
         if user_states[user_id] == "模式4":
-            reply = RAG_Model(event,line_bot_api)
+            reply = ask_openai(event)
             # reply = "回答模式4"
             user_states[user_id] = "" 
             line_bot_api.reply_message(event.reply_token, TextMessage(text=reply))

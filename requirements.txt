@@ -7,11 +7,5 @@ redis
 openai
 pymysql
 numpy
-python-dotenv
 google-cloud-storage
-langchain
 torch==2.5.1
-transformers
-langchain-community
-sentence-transformers
-faiss-cpu
